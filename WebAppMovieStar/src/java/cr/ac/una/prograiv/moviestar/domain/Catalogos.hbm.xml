@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/06/2016 04:31:10 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cr.ac.una.prograiv.moviestar.domain.Catalogos" table="catalogos" catalog="moviestar" optimistic-lock="version">
+        <id name="CId" type="java.lang.Integer">
+            <column name="c_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categorias" class="cr.ac.una.prograiv.moviestar.domain.Categorias" fetch="select">
+            <column name="c_categoria" />
+        </many-to-one>
+        <many-to-one name="detalles" class="cr.ac.una.prograiv.moviestar.domain.Detalles" fetch="select">
+            <column name="c_detalle" />
+        </many-to-one>
+        <property name="CNombre" type="string">
+            <column name="c_nombre" length="45" />
+        </property>
+        <property name="CDirector" type="string">
+            <column name="c_director" length="15" />
+        </property>
+        <property name="CActorPrin" type="string">
+            <column name="c_actorPrin" length="15" />
+        </property>
+        <property name="CCantidad" type="java.lang.Integer">
+            <column name="c_cantidad" />
+        </property>
+        <property name="CTipo" type="string">
+            <column name="c_tipo" length="10" />
+        </property>
+        <property name="CPrecAlqu" type="java.lang.Float">
+            <column name="c_prec_alqu" precision="12" scale="0" />
+        </property>
+        <property name="CPrecComp" type="java.lang.Float">
+            <column name="c_prec_comp" precision="12" scale="0" />
+        </property>
+        <property name="CUrlImg" type="string">
+            <column name="c_urlImg" length="175" />
+        </property>
+        <property name="CDescrip" type="string">
+            <column name="c_descrip" />
+        </property>
+    </class>
+</hibernate-mapping>

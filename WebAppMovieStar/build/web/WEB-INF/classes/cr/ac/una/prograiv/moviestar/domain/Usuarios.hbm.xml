@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-jun-2016 18:35:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cr.ac.una.prograiv.moviestar.domain.Usuarios" table="usuarios" catalog="moviestar" optimistic-lock="version">
+        <id name="UId" type="int">
+            <column name="u_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="UUsuario" type="string">
+            <column name="u_usuario" length="15" not-null="true" unique="true" />
+        </property>
+        <property name="UContrasena" type="string">
+            <column name="u_contrasena" length="15" />
+        </property>
+        <property name="UNombre" type="string">
+            <column name="u_nombre" length="15" />
+        </property>
+        <property name="UApellidos" type="string">
+            <column name="u_apellidos" length="25" />
+        </property>
+        <property name="UCorreo" type="string">
+            <column name="u_correo" length="45" unique="true" />
+        </property>
+        <property name="UFechaNac" type="date">
+            <column name="u_fechaNac" length="10" />
+        </property>
+        <property name="UDireccion" type="string">
+            <column name="u_direccion" length="45" />
+        </property>
+        <property name="UTelCasa" type="string">
+            <column name="u_telCasa" length="10" />
+        </property>
+        <property name="UTelCel" type="string">
+            <column name="u_telCel" length="10" />
+        </property>
+        <property name="UTipo" type="string">
+            <column name="u_tipo" length="15" />
+        </property>
+        <set name="ordeneses" table="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="o_usuario" />
+            </key>
+            <one-to-many class="cr.ac.una.prograiv.moviestar.domain.Ordenes" />
+        </set>
+    </class>
+</hibernate-mapping>

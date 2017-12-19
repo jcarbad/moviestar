@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/06/2016 04:31:10 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cr.ac.una.prograiv.moviestar.domain.Detalles" table="detalles" catalog="moviestar" optimistic-lock="version">
+        <id name="DId" type="java.lang.Integer">
+            <column name="d_Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ordenes" class="cr.ac.una.prograiv.moviestar.domain.Ordenes" fetch="select">
+            <column name="d_IdO" not-null="true" />
+        </many-to-one>
+        <property name="DTipo" type="string">
+            <column name="d_tipo" length="10" />
+        </property>
+        <property name="DFechaLimite" type="date">
+            <column name="d_fechaLimite" length="10" />
+        </property>
+        <property name="DPrecio" type="java.lang.Float">
+            <column name="d_precio" precision="12" scale="0" />
+        </property>
+        <property name="DEstado" type="string">
+            <column name="d_estado" length="45" />
+        </property>
+        <property name="DCatalogo" type="int">
+            <column name="d_catalogo" not-null="true" />
+        </property>
+        <set name="catalogoses" table="catalogos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="c_detalle" />
+            </key>
+            <one-to-many class="cr.ac.una.prograiv.moviestar.domain.Catalogos" />
+        </set>
+    </class>
+</hibernate-mapping>

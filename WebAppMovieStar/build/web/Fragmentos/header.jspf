@@ -1,0 +1,106 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="cr.ac.una.prograiv.moviestar.domain.Usuarios" %>
+<%@page import="java.util.*" session="true" %>
+<script src="js/utils.js"></script>
+<%
+
+    HttpSession sesion = request.getSession();
+    
+                if( sesion.getAttribute("usuario")== null) {
+                    out.println("<input id='sesion' type='hidden' name='sesion' value='f'/>");                    
+                 } else {
+                  out.println("<input id='sesion' type='hidden' name='sesion' value='t'/>");
+                  out.println("<input id='idUser' type='hidden' name='idUser' value='"+sesion.getAttribute("id")+"'/>");
+                  if( sesion.getAttribute("tipo") == "Cliente"){
+                      out.println("<input id='typeUser' type='hidden' name='typeUser' value='c'/>");
+                  }
+                  else {
+                      out.println("<input id='typeUser' type='hidden' name='typeUser' value='a'/>");
+                  }
+                }
+            
+%>
+
+<nav class="navbar navbar-default">  
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navegacion">
+                    <span class="sr-only">Desplegar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="pull-left" href="index.jsp"> <img src="http://i1154.photobucket.com/albums/p539/Byronizqui/prograiv/logo_zpspvoqfv70.png" alt="logo"> </a>
+                </div>  
+                <div class="collapse navbar-collapse bottom col-md-8 col-lg-8" id="navegacion">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.jsp">Inicio</a></li>
+                        <li><a href="#footer">Nosotros</a></li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Películas<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="pelisub">
+                    </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Series<span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="seriessub">
+                            </ul>
+                        </li>
+                        <li><a href="#" id="contac">Contáctanos</a></li>
+                    
+                    <% if(sesion.getAttribute("tipo") == "Administrador") { %>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrar<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="categoriasAdmin.jsp">Administrar Categorías</a></li>
+                            <li><a href="catalogosAdmin.jsp">Administrar Catalogos</a></li>
+                            <li><a href="usuariosAdmin.jsp">Administrar Usuarios</a></li>
+                            <li><a href="ordenesAdmin.jsp">Administrar Ordenes</a></li>
+                            <li><a href="graficosAdmin.jsp">Reportes</a></li>
+                        </ul>
+                    </li>
+                    <% } %> 
+                    
+                    </ul>
+                </div> 
+                <form id="loginForm" class="navbar-form navbar-right" method="post">
+                    <% if(sesion.getAttribute("usuario") == null){ %> 
+                        <a href="Login.jsp" class="btn btn-primary" id="login2"><span class="glyphicon"></span>Iniciar Sesion</a>
+                    <% } %>
+                    <% if(sesion.getAttribute("usuario")  != null){ %> 
+                        <a class="btn btn-danger" id="logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Cerrar Sesion</a>;
+                    <% } %>
+                    
+                    <div class="modal fade" id="myModal4" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="myModal4Title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body" id="myModal4Message">
+                                    <p>This is a small modal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                <form class="navbar-form navbar-right">
+                    <% if(sesion.getAttribute("usuario")  != null){ %> 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="userSettings.jsp"><%=sesion.getAttribute("nombre")%></a></li>
+                        <%if(sesion.getAttribute("tipo") == "Cliente") {    %>
+                           <li><button type='button' class='btn btn-info' id="btnCar"><span class='glyphicon glyphicon-shopping-cart'></span></button></li>
+                        <% } %>
+                    </ul>
+                    <% } %>
+                </form>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input type="search" class="form-control" id="buscador" placeholder="Buscar por nombre">
+                    </div>
+                    <button type="button" class="btn btn-info" id="buscadorBoton"><span class="glyphicon glyphicon-search"></span></button>
+                   <div class="form-group" id="nombreUsuario"></div>
+                </form>
+</nav>
